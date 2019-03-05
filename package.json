@@ -11,8 +11,10 @@
   "author": "Rasik Jain",
   "license": "ISC",
   "dependencies": {
+    "cors": "^2.8.5",
     "dotenv": "^6.2.0",
-    "eslint": "^5.15.1"
+    "eslint": "^5.15.1",
+    "express": "^4.16.4"
   },
   "devDependencies": {
     "@babel/core": "^7.3.4",
