@@ -7,16 +7,16 @@ import routes from './routes';
 
 var port = parseInt(process.env.PORT_NUMBER) || 4000;
 const app = express();
-const eraseDatabaseOnSync = true;
+const eraseDatabaseOnSync = false;
 
 app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-app.use((req, res, next) => {
+app.use(async (req, res, next) => {
   req.context = {
     models,
-    me: models.users[1]
+    me: await models.User.findByLogin('test@test.com')
   };
   next();
 });
@@ -47,8 +47,8 @@ connectDb().then(async () => {
       models.User.deleteMany({}),
       models.Message.deleteMany({})
     ]);
+    createUsersWithMessages();
   }
-  createUsersWithMessages();
   app.listen(port, () => console.log(`Example app listening on port ${port}!`));
 });
 
